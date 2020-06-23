@@ -35,6 +35,10 @@
 //! }
 //! ```
 
+// Features for specialization
+#![feature(min_specialization)]
+#![feature(rustc_attrs)]
+
 use std::mem;       // yup, used pretty much everywhere.
 use std::io::Write; // for bytes.write_all; push_all is unstable and extend is slow.
 use std::io::Result as IOResult;
@@ -157,6 +161,7 @@ pub fn measure<T: Abomonation>(typed: &T) -> usize {
 ///
 /// If you are concerned about safety, it may be best to avoid Abomonation all together. It does
 /// several things that may be undefined behavior, depending on how undefined behavior is defined.
+#[rustc_specialization_trait]
 pub trait Abomonation {
 
     /// Write any additional information about `&self` beyond its binary representation.
